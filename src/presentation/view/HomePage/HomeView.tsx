@@ -1,4 +1,15 @@
-import { Box, Button, FormControl, Grid, Stack, TextareaAutosize, TextField, Typography } from "@mui/material"
+import {
+	Box,
+	Button,
+	FormControlLabel,
+	FormGroup,
+	Grid,
+	Stack,
+	Switch,
+	TextareaAutosize,
+	TextField,
+	Typography,
+} from "@mui/material"
 import HomeViewModel from "./HomeViewModel"
 
 function useViewModel() {
@@ -7,48 +18,84 @@ function useViewModel() {
 
 /** A tela principal do site */
 const HomeView = () => {
-	const { text, setText, cipher, setCipher, encryptedText, criptographyText} = useViewModel()
+	const {
+		text,
+		setText,
+		cipher,
+		setCipher,
+		encryptedText,
+		criptographyText,
+		encrypt,
+		setEncrypt,
+		encryptText,
+		toogleEncryptOrDecrypt,
+		inverseTextInputWithOutput,
+	} = useViewModel()
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setEncrypt(event.target.checked)
+		toogleEncryptOrDecrypt()
+	}
 
 	return (
 		<Stack>
 			<Typography variant="h1" color="primary">
 				Cezar Encryption
 			</Typography>
-			<Grid container textAlign={"center"} direction={"column"} mt={8}>
-			<FormControl component="fieldset" variant="standard">
-
-			</FormControl>
-				<Grid item>
+			<Grid
+				container
+				textAlign={"center"}
+				direction={"column"}
+				mt={8}
+				justifyContent="center"
+				alignItems={"center"}
+			>
+				<Grid item mt={2}>
 					<TextField
 						label="Cifra"
-						helperText="A cifra usada para encriptar o texto"
+						helperText="A cifra usada."
 						sx={{ textDecorationColor: "primary" }}
 						type="number"
 						name="cifra"
 						style={{ width: 300 }}
-						value={ cipher }
-						onChange={e => setCipher(Number(e.target.value))}
+						value={cipher}
+						onChange={(e) => setCipher(Number(e.target.value))}
 					/>
 				</Grid>
-				<Grid item mt={6}>
-					<Typography variant="h4" color="primary">
-						O texto a ser criptografado
-					</Typography>
+				<Grid item mt={2}>
 					<Box mt={2}>
 						<TextField
 							id="standard-multiline-flexible"
-							label="texto"
+							label={"Texto"}
+							helperText="O texto usado para criptografar ou descriptografar."
 							multiline
 							maxRows={5}
-							variant="standard"
+							variant="outlined"
 							style={{ width: 300 }}
-							value={ text }
-							onChange={ e => setText(e.target.value)}
+							value={text}
+							onChange={(e) => setText(e.target.value)}
 						/>
 					</Box>
 				</Grid>
-				<Grid item mt={6}>
-					<Button variant="contained" onClick={ criptographyText }>CRIPTOGRAFAR</Button>
+				<Grid container mt={6} direction={"column"} alignItems={"center"}>
+					<Grid item>
+						<FormGroup>
+							<FormControlLabel
+								control={<Switch checked={encrypt} onChange={handleChange} />}
+								label={encryptText}
+							/>
+						</FormGroup>
+					</Grid>
+					<Grid item mt={1}>
+						<Button variant="contained" onClick={criptographyText}>
+							CONVERTER
+						</Button>
+					</Grid>
+					<Grid item mt={1}>
+						<Button variant="contained" onClick={inverseTextInputWithOutput} color="info">
+							INVERTER TEXTO
+						</Button>
+					</Grid>
 				</Grid>
 				<Grid container mt={6} direction={"column"}>
 					<Grid container mt={2} direction={"row"} justifyContent="center">
@@ -56,15 +103,19 @@ const HomeView = () => {
 							minRows={5}
 							placeholder="Texto criptografado"
 							style={{ width: 300 }}
-							value={ encryptedText }
+							value={encryptedText}
 						/>
-						<Button onClick={ () => {
-
-							   if ('clipboard' in navigator) {
-									navigator.clipboard.writeText(encryptedText);
+						<Button
+							onClick={() => {
+								if ("clipboard" in navigator) {
+									navigator.clipboard.writeText(encryptedText)
 								} else {
-									document.execCommand('copy', true, encryptedText);
-								}}}>Copiar</Button>
+									document.execCommand("copy", true, encryptedText)
+								}
+							}}
+						>
+							Copiar
+						</Button>
 					</Grid>
 				</Grid>
 			</Grid>
