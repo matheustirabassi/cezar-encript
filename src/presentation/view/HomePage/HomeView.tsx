@@ -11,6 +11,7 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material"
+import { useState } from "react"
 import HomeViewModel from "./HomeViewModel"
 
 function useViewModel() {
@@ -30,14 +31,17 @@ const HomeView = () => {
 		encryptText,
 		toogleEncryptOrDecrypt,
 		inverseTextInputWithOutput,
-		openSnackbar, setOpenSnackbar,
-		convertText
+		openSnackbar,
+		setOpenSnackbar,
+		convertText,
 	} = useViewModel()
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEncrypt(event.target.checked)
 		toogleEncryptOrDecrypt()
 	}
+
+	const [buttonCopyClicked, setButtonCopyClicked] = useState(false)
 
 	return (
 		<Grid container direction="column" justifyContent="space-between" alignItems="stretch" mt={2}>
@@ -120,6 +124,8 @@ const HomeView = () => {
 								} else {
 									document.execCommand("copy", true, encryptedText)
 								}
+
+								setButtonCopyClicked(true)
 							}}
 						>
 							Copiar
@@ -130,6 +136,10 @@ const HomeView = () => {
 
 			<Snackbar open={openSnackbar} autoHideDuration={2000} onClose={() => setOpenSnackbar(false)}>
 				<Alert severity="success">Texto convertido!</Alert>
+			</Snackbar>
+
+			<Snackbar open={buttonCopyClicked} autoHideDuration={2000} onClose={() => setButtonCopyClicked(false)}>
+				<Alert severity="info">Texto criptografado copiado!</Alert>
 			</Snackbar>
 
 			<Grid container justifyContent="flex-end" mt={2} pr={4}>
