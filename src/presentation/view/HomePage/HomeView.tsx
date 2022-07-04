@@ -1,10 +1,11 @@
 import {
+	Alert,
 	Box,
 	Button,
 	FormControlLabel,
 	FormGroup,
 	Grid,
-	Stack,
+	Snackbar,
 	Switch,
 	TextareaAutosize,
 	TextField,
@@ -24,12 +25,13 @@ const HomeView = () => {
 		cipher,
 		setCipher,
 		encryptedText,
-		criptographyText,
 		encrypt,
 		setEncrypt,
 		encryptText,
 		toogleEncryptOrDecrypt,
 		inverseTextInputWithOutput,
+		openSnackbar, setOpenSnackbar,
+		convertText
 	} = useViewModel()
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,10 +40,11 @@ const HomeView = () => {
 	}
 
 	return (
-		<Stack>
+		<Grid container direction="column" justifyContent="space-between" alignItems="stretch" mt={2}>
 			<Typography variant="h1" color="primary">
 				Cezar Encryption
 			</Typography>
+
 			<Grid
 				container
 				textAlign={"center"}
@@ -62,6 +65,7 @@ const HomeView = () => {
 						onChange={(e) => setCipher(Number(e.target.value))}
 					/>
 				</Grid>
+
 				<Grid item mt={2}>
 					<Box mt={2}>
 						<TextField
@@ -77,6 +81,7 @@ const HomeView = () => {
 						/>
 					</Box>
 				</Grid>
+
 				<Grid container mt={6} direction={"column"} alignItems={"center"}>
 					<Grid item>
 						<FormGroup>
@@ -86,17 +91,20 @@ const HomeView = () => {
 							/>
 						</FormGroup>
 					</Grid>
+
 					<Grid item mt={1}>
-						<Button variant="contained" onClick={criptographyText}>
+						<Button variant="contained" onClick={convertText}>
 							CONVERTER
 						</Button>
 					</Grid>
+
 					<Grid item mt={1}>
 						<Button variant="contained" onClick={inverseTextInputWithOutput} color="info">
 							INVERTER TEXTO
 						</Button>
 					</Grid>
 				</Grid>
+
 				<Grid container mt={6} direction={"column"}>
 					<Grid container mt={2} direction={"row"} justifyContent="center">
 						<TextareaAutosize
@@ -119,7 +127,17 @@ const HomeView = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-		</Stack>
+
+			<Snackbar open={openSnackbar} autoHideDuration={2000} onClose={() => setOpenSnackbar(false)}>
+				<Alert severity="success">Texto convertido!</Alert>
+			</Snackbar>
+
+			<Grid container justifyContent="flex-end" mt={2} pr={4}>
+				<Typography variant="h6" color="primary">
+					feito com ❤️ por Matheus
+				</Typography>
+			</Grid>
+		</Grid>
 	)
 }
 

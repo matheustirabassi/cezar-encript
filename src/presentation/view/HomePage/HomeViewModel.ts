@@ -21,9 +21,21 @@ export default function HomeContentViewModel() {
 	/** O texto que representa o estado de criptografia */
 	const [encryptText, setEncryptText] = useState(encryptTextValues.encrypt)
 
+	const [openSnackbar, setOpenSnackbar] = useState(false)
+
 	/** Alterna o valor do texto entre criptografar e descriptografar */
 	function toogleEncryptOrDecrypt() {
 		setEncryptText(encrypt ? encryptTextValues.encrypt : encryptTextValues.decrypt)
+	}
+
+	function convertText () {
+		if(text === "") {
+			return
+		}
+
+
+		criptographyText()
+		setOpenSnackbar(true)
 	}
 
 	/** Criptografa o texto */
@@ -41,8 +53,10 @@ export default function HomeContentViewModel() {
 	/** Inverte o texto de entrada com o de saída */
 	function inverseTextInputWithOutput() {
 		setEncryptedText(text)
-
 		setText(encryptedText)
+
+		setEncrypt(!encrypt)
+		toogleEncryptOrDecrypt()
 	}
 
 
@@ -53,6 +67,8 @@ export default function HomeContentViewModel() {
 		criptographyText,
 		encrypt, setEncrypt,
 		encryptText, toogleEncryptOrDecrypt,
-		inverseTextInputWithOutput
+		inverseTextInputWithOutput,
+		openSnackbar, setOpenSnackbar,
+		convertText
 	}
 }
