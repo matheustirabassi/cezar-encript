@@ -59,6 +59,12 @@ export default function HomeContentViewModel() {
 		toogleEncryptOrDecrypt()
 	}
 
+	function cleanTexts() {
+		setText("")
+		setEncryptedText("")
+		setCipher(0)
+	}
+
 
 	return {
 		text, setText,
@@ -69,6 +75,6 @@ export default function HomeContentViewModel() {
 		encryptText, toogleEncryptOrDecrypt,
 		inverseTextInputWithOutput,
 		openSnackbar, setOpenSnackbar,
-		convertText
+		convertText, cleanTexts
 	}
 }

@@ -34,6 +34,7 @@ const HomeView = () => {
 		openSnackbar,
 		setOpenSnackbar,
 		convertText,
+		cleanTexts,
 	} = useViewModel()
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,19 +45,18 @@ const HomeView = () => {
 	const [buttonCopyClicked, setButtonCopyClicked] = useState(false)
 
 	return (
-		<Grid container direction="column" justifyContent="space-between" alignItems="stretch" mt={2}>
+		<Grid container direction="column" mt={2}>
 			<Typography variant="h1" color="primary">
 				Cezar Encryption
 			</Typography>
 
-			<Grid
-				container
-				textAlign={"center"}
-				direction={"column"}
-				mt={8}
-				justifyContent="center"
-				alignItems={"center"}
-			>
+			<Grid container direction={"column"} mt={8} alignItems="center">
+				<Grid item mt={2}>
+					<Button onClick={cleanTexts} sx={{ width: 300 }}>
+						Limpar
+					</Button>
+				</Grid>
+
 				<Grid item mt={2}>
 					<TextField
 						label="Cifra"
@@ -74,12 +74,12 @@ const HomeView = () => {
 					<Box mt={2}>
 						<TextField
 							id="standard-multiline-flexible"
-							label={"Texto"}
+							label="Texto"
 							helperText="O texto usado para criptografar ou descriptografar."
 							multiline
-							maxRows={5}
+							maxRows={6}
 							variant="outlined"
-							style={{ width: 300 }}
+							sx={{ width: 300 }}
 							value={text}
 							onChange={(e) => setText(e.target.value)}
 						/>
@@ -97,13 +97,18 @@ const HomeView = () => {
 					</Grid>
 
 					<Grid item mt={1}>
-						<Button variant="contained" onClick={convertText}>
+						<Button variant="contained" onClick={convertText} sx={{ width: 300 }}>
 							CONVERTER
 						</Button>
 					</Grid>
 
 					<Grid item mt={1}>
-						<Button variant="contained" onClick={inverseTextInputWithOutput} color="info">
+						<Button
+							variant="contained"
+							onClick={inverseTextInputWithOutput}
+							color="info"
+							sx={{ width: 300 }}
+						>
 							INVERTER TEXTO
 						</Button>
 					</Grid>
@@ -114,8 +119,8 @@ const HomeView = () => {
 						<TextareaAutosize
 							minRows={5}
 							placeholder="Texto criptografado"
-							style={{ width: 300 }}
 							value={encryptedText}
+							style={{ width: 300 }}
 						/>
 						<Button
 							onClick={() => {
@@ -138,7 +143,11 @@ const HomeView = () => {
 				<Alert severity="success">Texto convertido!</Alert>
 			</Snackbar>
 
-			<Snackbar open={buttonCopyClicked} autoHideDuration={2000} onClose={() => setButtonCopyClicked(false)}>
+			<Snackbar
+				open={buttonCopyClicked}
+				autoHideDuration={2000}
+				onClose={() => setButtonCopyClicked(false)}
+			>
 				<Alert severity="info">Texto criptografado copiado!</Alert>
 			</Snackbar>
 
