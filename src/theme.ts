@@ -20,7 +20,7 @@ const ggLearningTheme = createTheme({
 		},
 		text: {
 			primary: "#FFFFFF",
-			secondary: "#FFB703"
+			secondary: "#FFB703",
 		},
 	},
 	typography: {
@@ -69,6 +69,16 @@ const ggLearningTheme = createTheme({
 			styleOverrides: {
 				root: {
 					backgroundColor: "#023047",
+				},
+			},
+		},
+
+		MuiTab: {
+			styleOverrides: {
+				root: {
+					backgroundColor: "#023047",
+					fontSize: "26px",
+					fontWeight: 600,
 				},
 			},
 		},
