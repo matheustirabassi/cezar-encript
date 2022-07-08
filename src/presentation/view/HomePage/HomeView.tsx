@@ -1,163 +1,46 @@
-import {
-	Alert,
-	Box,
-	Button,
-	FormControlLabel,
-	FormGroup,
-	Grid,
-	Snackbar,
-	Switch,
-	TextareaAutosize,
-	TextField,
-	Typography,
-} from "@mui/material"
+import { AppBar, Box, Tab, Tabs } from "@mui/material"
+import TabPanel from "presentation/components/TabPanel"
 import { useState } from "react"
-import HomeViewModel from "./HomeViewModel"
-
-function useViewModel() {
-	return HomeViewModel()
-}
+import SwipeableViews from "react-swipeable-views"
+import HomeContentCaesarCipherView from "./HomeContentCaesarCipherView"
 
 /** A tela principal do site */
-const HomeView = () => {
-	const {
-		text,
-		setText,
-		cipher,
-		setCipher,
-		encryptedText,
-		encrypt,
-		setEncrypt,
-		encryptText,
-		toogleEncryptOrDecrypt,
-		inverseTextInputWithOutput,
-		openSnackbar,
-		setOpenSnackbar,
-		convertText,
-		cleanTexts,
-	} = useViewModel()
+export default function HomeView() {
+	const [value, setValue] = useState(0)
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setEncrypt(event.target.checked)
-		toogleEncryptOrDecrypt()
+	const handleChange = (_event: unknown, newValue: number) => {
+		setValue(newValue)
 	}
 
-	const [buttonCopyClicked, setButtonCopyClicked] = useState(false)
+	const handleChangeIndex = (index: number) => {
+		setValue(index)
+	}
 
 	return (
-		<Grid container direction="column" mt={2}>
-			<Typography variant="h1" color="primary">
-				Cezar Encryption
-			</Typography>
+		<Box>
+			<AppBar position="static">
+				<Tabs value={value} onChange={handleChange} variant="fullWidth" textColor="secondary">
+					<Tab label="Caesar Cipher" {...a11yProps(0)} />
 
-			<Grid container direction={"column"} mt={8} alignItems="center">
-				<Grid item mt={2}>
-					<Button onClick={cleanTexts} sx={{ width: 300 }}>
-						Limpar
-					</Button>
-				</Grid>
+					<Tab label="👀" {...a11yProps(1)} />
+				</Tabs>
+			</AppBar>
 
-				<Grid item mt={2}>
-					<TextField
-						label="Cifra"
-						helperText="A cifra usada."
-						sx={{ textDecorationColor: "primary" }}
-						type="number"
-						name="cifra"
-						style={{ width: 300 }}
-						value={cipher}
-						onChange={(e) => setCipher(Number(e.target.value))}
-					/>
-				</Grid>
+			<SwipeableViews index={value} onChangeIndex={handleChangeIndex} >
+				<TabPanel value={value} index={0} >
+					<HomeContentCaesarCipherView />
+				</TabPanel>
 
-				<Grid item mt={2}>
-					<Box mt={2}>
-						<TextField
-							id="standard-multiline-flexible"
-							label="Texto"
-							helperText="O texto usado para criptografar ou descriptografar."
-							multiline
-							maxRows={6}
-							variant="outlined"
-							sx={{ width: 300 }}
-							value={text}
-							onChange={(e) => setText(e.target.value)}
-						/>
-					</Box>
-				</Grid>
-
-				<Grid container mt={6} direction={"column"} alignItems={"center"}>
-					<Grid item>
-						<FormGroup>
-							<FormControlLabel
-								control={<Switch checked={encrypt} onChange={handleChange} />}
-								label={encryptText}
-							/>
-						</FormGroup>
-					</Grid>
-
-					<Grid item mt={1}>
-						<Button variant="contained" onClick={convertText} sx={{ width: 300 }}>
-							CONVERTER
-						</Button>
-					</Grid>
-
-					<Grid item mt={1}>
-						<Button
-							variant="contained"
-							onClick={inverseTextInputWithOutput}
-							color="info"
-							sx={{ width: 300 }}
-						>
-							INVERTER TEXTO
-						</Button>
-					</Grid>
-				</Grid>
-
-				<Grid container mt={6} direction={"column"}>
-					<Grid container mt={2} direction={"row"} justifyContent="center">
-						<TextareaAutosize
-							minRows={5}
-							placeholder="Texto criptografado"
-							value={encryptedText}
-							style={{ width: 300 }}
-						/>
-						<Button
-							onClick={() => {
-								if ("clipboard" in navigator) {
-									navigator.clipboard.writeText(encryptedText)
-								} else {
-									document.execCommand("copy", true, encryptedText)
-								}
-
-								setButtonCopyClicked(true)
-							}}
-						>
-							Copiar
-						</Button>
-					</Grid>
-				</Grid>
-			</Grid>
-
-			<Snackbar open={openSnackbar} autoHideDuration={2000} onClose={() => setOpenSnackbar(false)}>
-				<Alert severity="success">Texto convertido!</Alert>
-			</Snackbar>
-
-			<Snackbar
-				open={buttonCopyClicked}
-				autoHideDuration={2000}
-				onClose={() => setButtonCopyClicked(false)}
-			>
-				<Alert severity="info">Texto criptografado copiado!</Alert>
-			</Snackbar>
-
-			<Grid container justifyContent="flex-end" mt={2} pr={4}>
-				<Typography variant="h6" color="primary">
-					feito com ❤️ por Matheus
-				</Typography>
-			</Grid>
-		</Grid>
+				<TabPanel value={value} index={1} >
+					Item Two
+				</TabPanel>
+			</SwipeableViews>
+		</Box>
 	)
+	function a11yProps(index: any) {
+		return {
+			id: `action-tab-${index}`,
+			"aria-controls": `action-tabpanel-${index}`,
+		}
+	}
 }
-
-export default HomeView
