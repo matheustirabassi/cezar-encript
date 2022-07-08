@@ -1,5 +1,5 @@
 import { AppBar, Box, Tab, Tabs } from "@mui/material"
-import TabPanel from "presentation/components/TabPanel"
+import { TabPanel } from "presentation/components/TabPanel"
 import { useState } from "react"
 import SwipeableViews from "react-swipeable-views"
 import HomeContentCaesarCipherView from "./HomeContentCaesarCipherView"
@@ -17,25 +17,26 @@ export default function HomeView() {
 	}
 
 	return (
-		<Box>
-			<AppBar position="static">
-				<Tabs value={value} onChange={handleChange} variant="fullWidth" textColor="secondary">
-					<Tab label="Caesar Cipher" {...a11yProps(0)} />
+		<>
+			<Box>
+				<AppBar position="static">
+					<Tabs value={value} onChange={handleChange} variant="fullWidth" textColor="secondary">
+						<Tab label="Caesar Cipher" {...a11yProps(0)} />
 
-					<Tab label="👀" {...a11yProps(1)} />
-				</Tabs>
-			</AppBar>
+						<Tab label="👀" {...a11yProps(1)} />
+					</Tabs>
+				</AppBar>
+				<SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+					<TabPanel value={value} index={0}>
+						<HomeContentCaesarCipherView />
+					</TabPanel>
 
-			<SwipeableViews index={value} onChangeIndex={handleChangeIndex} >
-				<TabPanel value={value} index={0} >
-					<HomeContentCaesarCipherView />
-				</TabPanel>
-
-				<TabPanel value={value} index={1} >
-					Item Two
-				</TabPanel>
-			</SwipeableViews>
-		</Box>
+					<TabPanel value={value} index={1}>
+						Item Two
+					</TabPanel>
+				</SwipeableViews>
+			</Box>
+		</>
 	)
 	function a11yProps(index: any) {
 		return {

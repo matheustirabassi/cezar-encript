@@ -1,14 +1,16 @@
 import { Box, Typography } from "@mui/material";
 
-interface TabPanelProps {
-  children?: JSX.Element | React.ReactChild;
+export interface TabPanelProps {
+  children?: React.ReactNode;
+
   dir?: string;
+
   index: Number;
+
   value: Number;
 }
 
-export default function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+export const TabPanel = ({ children, index, value } : TabPanelProps) => {
 
   return (
     <Typography
@@ -17,9 +19,8 @@ export default function TabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`action-tabpanel-${index}`}
       aria-labelledby={`action-tab-${index}`}
-      {...other}
     >
       {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
     </Typography>
-  );
+  )
 }

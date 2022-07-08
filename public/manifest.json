@@ -1,0 +1,7 @@
+{
+  "name": "Encrypt",
+  "short_name": "EC",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "orientation": "portrait-primary"
+}

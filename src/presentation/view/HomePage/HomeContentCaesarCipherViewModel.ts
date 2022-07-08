@@ -8,7 +8,7 @@ export default function HomeContentCaesarCipherViewModel() {
 	}
 
 	/** A cifra a ser usada para criptografar o texto */
-	const [cipher, setCipher] = useState<Number>()
+	const [cipher, setCipher] = useState<Number>(0)
 
 	/** O texto a ser criptografado */
 	const [text, setText] = useState("")
