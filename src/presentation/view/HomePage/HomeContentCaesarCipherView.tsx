@@ -17,12 +17,16 @@ import {
 } from "@mui/material"
 import { useState } from "react"
 import HomeContentCaesarCipherViewModel from "./HomeContentCaesarCipherViewModel"
+import { useTranslation } from "react-i18next"
+
 function useViewModel() {
 	return HomeContentCaesarCipherViewModel()
 }
 
 /** A tela principal do site */
 export default function HomeContentCaesarCipherView() {
+	const { t } = useTranslation()
+
 	const {
 		text,
 		setText,
@@ -52,17 +56,17 @@ export default function HomeContentCaesarCipherView() {
 			<Grid container direction={"column"} alignItems="center">
 				<Grid item mt={2}>
 					<Button onClick={cleanTexts} sx={{ width: 300 }}>
-						Limpar
+						{ t("clear") }
 					</Button>
 				</Grid>
 
 				<Grid item mt={2}>
 					<TextField
-						label="Cifra"
-						helperText="A cifra usada."
+						label={ t("cipher") }
+						helperText={ t("used_cipher_description") }
 						sx={{ textDecorationColor: "primary" }}
 						type="number"
-						name="cifra"
+						name={ t("cipher") }
 						style={{ width: 300 }}
 						value={cipher}
 						onChange={(e) => setCipher(Number(e.target.value))}
@@ -73,8 +77,8 @@ export default function HomeContentCaesarCipherView() {
 					<Box mt={2}>
 						<TextField
 							id="standard-multiline-flexible"
-							label="Texto"
-							helperText="O texto usado para criptografar ou descriptografar."
+							label={ t("text") }
+							helperText={ t("used_text_description") }
 							multiline
 							maxRows={6}
 							variant="outlined"
@@ -97,7 +101,7 @@ export default function HomeContentCaesarCipherView() {
 
 					<Grid item mt={1}>
 						<Button variant="contained" onClick={convertText} sx={{ width: 300, minHeight: 30 }}>
-							<LockIcon fontSize="large" sx={{ display: encrypt ? "block" : "none"}} />
+							<LockIcon fontSize="large" sx={{ display: encrypt ? "block" : "none" }} />
 							<KeyIcon fontSize="large" sx={{ display: encrypt ? "none" : "block" }} />
 						</Button>
 					</Grid>
@@ -118,7 +122,7 @@ export default function HomeContentCaesarCipherView() {
 					<Grid container mt={2} direction={"row"} justifyContent="center">
 						<TextareaAutosize
 							minRows={5}
-							placeholder="Texto criptografado"
+							placeholder={ t("encrypted_text_description") }
 							value={encryptedText}
 							style={{ width: 300 }}
 						/>
@@ -153,7 +157,7 @@ export default function HomeContentCaesarCipherView() {
 
 			<Grid container justifyContent="flex-end" mt={2} pr={4}>
 				<Typography variant="h6" color="primary">
-					feito com ❤️ por Matheus
+				{ t("author_description") }
 				</Typography>
 			</Grid>
 		</Grid>

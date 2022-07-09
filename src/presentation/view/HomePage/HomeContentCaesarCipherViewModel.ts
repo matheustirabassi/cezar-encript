@@ -1,10 +1,13 @@
 import { useState } from "react"
+import "crypto-js/aes"
+import { useTranslation } from 'react-i18next';
 
 export default function HomeContentCaesarCipherViewModel() {
+	const { t } = useTranslation()
 
 	const encryptTextValues = {
-		encrypt: "Criptografar",
-		decrypt: "Descriptografar"
+		encrypt: t("encrypt"),
+		decrypt: t("decrypt")
 	}
 
 	/** A cifra a ser usada para criptografar o texto */
@@ -40,11 +43,6 @@ export default function HomeContentCaesarCipherViewModel() {
 		if (cipher === 0) {
 			return
 		}
-
-		if (cipher === undefined) {
-			return
-		}
-
 
 		criptographyText()
 		setOpenSnackbar(true)

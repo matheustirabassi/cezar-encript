@@ -3,5 +3,6 @@
   "short_name": "EC",
   "start_url": "/",
   "display": "minimal-ui",
-  "orientation": "portrait-primary"
+  "orientation": "portrait-primary",
+  "language": "pt_br"
 }
