@@ -13,11 +13,11 @@ import {
 	Switch,
 	TextareaAutosize,
 	TextField,
-	Typography,
+	Typography
 } from "@mui/material"
 import { useState } from "react"
-import HomeContentCaesarCipherViewModel from "./HomeContentCaesarCipherViewModel"
 import { useTranslation } from "react-i18next"
+import HomeContentCaesarCipherViewModel from "./HomeContentCaesarCipherViewModel"
 
 function useViewModel() {
 	return HomeContentCaesarCipherViewModel()
@@ -56,17 +56,17 @@ export default function HomeContentCaesarCipherView() {
 			<Grid container direction={"column"} alignItems="center">
 				<Grid item mt={2}>
 					<Button onClick={cleanTexts} sx={{ width: 300 }}>
-						{ t("clear") }
+						{t("clear")}
 					</Button>
 				</Grid>
 
 				<Grid item mt={2}>
 					<TextField
-						label={ t("cipher") }
-						helperText={ t("used_cipher_description") }
+						label={t("cipher")}
+						helperText={t("used_cipher_description")}
 						sx={{ textDecorationColor: "primary" }}
 						type="number"
-						name={ t("cipher") }
+						name={t("cipher")}
 						style={{ width: 300 }}
 						value={cipher}
 						onChange={(e) => setCipher(Number(e.target.value))}
@@ -77,8 +77,8 @@ export default function HomeContentCaesarCipherView() {
 					<Box mt={2}>
 						<TextField
 							id="standard-multiline-flexible"
-							label={ t("text") }
-							helperText={ t("used_text_description") }
+							label={t("text")}
+							helperText={t("used_text_description")}
 							multiline
 							maxRows={6}
 							variant="outlined"
@@ -122,7 +122,7 @@ export default function HomeContentCaesarCipherView() {
 					<Grid container mt={2} direction={"row"} justifyContent="center">
 						<TextareaAutosize
 							minRows={5}
-							placeholder={ t("encrypted_text_description") }
+							placeholder={t("encrypted_text_description")}
 							value={encryptedText}
 							style={{ width: 300 }}
 						/>
@@ -157,7 +157,7 @@ export default function HomeContentCaesarCipherView() {
 
 			<Grid container justifyContent="flex-end" mt={2} pr={4}>
 				<Typography variant="h6" color="primary">
-				{ t("author_description") }
+					{t("author_description")}
 				</Typography>
 			</Grid>
 		</Grid>

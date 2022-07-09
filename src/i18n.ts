@@ -17,7 +17,9 @@ const resources = {
 			"decrypt": "Descriptografar",
 			"encrypted_text_description": "Texto criptografado",
 			"author_description": "feito com ❤️ por Matheus",
-			"aes": "AES"
+			"aes": "AES",
+			"token": "Token",
+			"token_description": "O token a ser usado para criptografar ou descriptografar o texto."
     }
   },
   en: {
@@ -31,8 +33,9 @@ const resources = {
 			"encrypt": "Criptografar",
 			"decrypt": "Descriptografar",
 			"encrypted_text_description": "Encrypted text",
-			"author_description": "feito com ❤️ por Matheus"
-
+			"author_description": "feito com ❤️ por Matheus",
+			"aes": "AES",
+			"token": "token"
     }
   }
 };
