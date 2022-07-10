@@ -23,5 +23,5 @@
   },
   "include": [
     "src"
-  ]
+, "test/presentation/view/HomeContentAESViewModel.test.ts"  ]
 }

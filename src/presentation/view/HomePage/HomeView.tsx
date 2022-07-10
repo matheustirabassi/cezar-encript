@@ -2,7 +2,7 @@ import { AppBar, Box, Tab, Tabs } from "@mui/material"
 import { TabPanel } from "presentation/components/TabPanel"
 import { useState } from "react"
 import SwipeableViews from "react-swipeable-views"
-import HomeContentAESView from "./HomeContentAES"
+import HomeContentAESView from "./HomeContentAESView"
 import HomeContentCaesarCipherView from "./HomeContentCaesarCipherView"
 import { useTranslation } from "react-i18next"
 
@@ -25,19 +25,19 @@ export default function HomeView() {
 			<Box>
 				<AppBar position="static">
 					<Tabs value={value} onChange={handleChange} variant="fullWidth" textColor="secondary">
-						<Tab icon={"🪙"} iconPosition="top" label={ t("caesar_cipher_tab_title") } {...a11yProps(0)} ></Tab>
+						<Tab icon="🔐" label={ t("aes") } {...a11yProps(0)} />
 
-						<Tab icon="🔐" label={ t("aes") } {...a11yProps(1)} />
+						<Tab icon={"🪙"} iconPosition="top" label={ t("caesar_cipher_tab_title") } {...a11yProps(1)} ></Tab>
 					</Tabs>
 				</AppBar>
 
 				<SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
 					<TabPanel value={value} index={0}>
-						<HomeContentCaesarCipherView />
+						<HomeContentAESView />
 					</TabPanel>
 
 					<TabPanel value={value} index={1}>
-						<HomeContentAESView />
+						<HomeContentCaesarCipherView />
 					</TabPanel>
 				</SwipeableViews>
 			</Box>
