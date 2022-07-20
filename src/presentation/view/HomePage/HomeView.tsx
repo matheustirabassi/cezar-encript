@@ -1,4 +1,4 @@
-import { AppBar, Box, Tab, Tabs } from "@mui/material"
+import { AppBar, Box, Grid, Tab, Tabs, Typography } from "@mui/material"
 import { TabPanel } from "presentation/components/TabPanel"
 import { useState } from "react"
 import SwipeableViews from "react-swipeable-views"
@@ -25,9 +25,14 @@ export default function HomeView() {
 			<Box>
 				<AppBar position="static">
 					<Tabs value={value} onChange={handleChange} variant="fullWidth" textColor="secondary">
-						<Tab icon="🔐" label={ t("aes") } {...a11yProps(0)} />
+						<Tab icon="🔐" label={t("aes")} {...a11yProps(0)} />
 
-						<Tab icon={"🪙"} iconPosition="top" label={ t("caesar_cipher_tab_title") } {...a11yProps(1)} ></Tab>
+						<Tab
+							icon={"🪙"}
+							iconPosition="top"
+							label={t("caesar_cipher_tab_title")}
+							{...a11yProps(1)}
+						></Tab>
 					</Tabs>
 				</AppBar>
 
@@ -40,6 +45,12 @@ export default function HomeView() {
 						<HomeContentCaesarCipherView />
 					</TabPanel>
 				</SwipeableViews>
+
+				<Grid container justifyContent="flex-end" mt={8} pr={4}>
+					<Typography variant="h6" color="primary">
+						{t("author_description")}
+					</Typography>
+				</Grid>
 			</Box>
 		</>
 	)

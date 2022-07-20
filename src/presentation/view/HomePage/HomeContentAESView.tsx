@@ -1,4 +1,5 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy"
+import ContentPasteIcon from "@mui/icons-material/ContentPaste"
 import {
 	Alert,
 	Button,
@@ -8,7 +9,7 @@ import {
 	Radio,
 	RadioGroup,
 	Snackbar,
-	TextareaAutosize,
+	TextareaAutosize
 } from "@mui/material"
 import Grid from "@mui/material/Grid/Grid"
 import TextField from "@mui/material/TextField/TextField"
@@ -32,34 +33,64 @@ export default function HomeContentAESView() {
 	const [buttonTransform, setButtonTransform] = useState(false)
 
 	return (
-		<Grid container direction={"column"} alignContent="space-around">
+		<Grid container direction={"column"} alignContent="center">
 			<Grid item mt={2}>
-				<TextField
-					variant="filled"
-					label={t("text")}
-					helperText={t("used_text_description")}
-					maxRows={5}
-					multiline
-					sx={{ maxWidth: "300px" }}
-					value={viewModel.inputText}
-					onChange={(e) => viewModel.setInputText(String(e.target.value))}
-				/>
+				<Grid container>
+					<TextField
+						variant="filled"
+						label={t("text")}
+						helperText={t("used_text_description")}
+						maxRows={5}
+						multiline
+						autoFocus={true}
+						sx={{ maxWidth: "250px" }}
+						value={viewModel.inputText}
+						onChange={(e) => viewModel.setInputText(String(e.target.value))}
+					/>
+					<Button
+						onClick={async () => {
+							viewModel.setInputText(await navigator.clipboard.readText())
+						}}
+					>
+						<ContentPasteIcon />
+					</Button>
+				</Grid>
 			</Grid>
 
 			<Grid item mt={2}>
-				<TextField
-					variant="filled"
-					label={t("token")}
-					helperText={t("token_description")}
-					maxRows={5}
-					multiline
-					sx={{ maxWidth: "300px" }}
-					value={viewModel.token}
-					onChange={(e) => viewModel.setToken(String(e.target.value))}
-				/>
+				<Grid container direction="row">
+					<TextField
+						variant="filled"
+						label={t("token")}
+						helperText={t("token_description")}
+						maxRows={5}
+						multiline
+						focused={viewModel.token !== ""}
+						sx={{ maxWidth: "250px" }}
+						value={viewModel.token}
+						onChange={(e) => viewModel.setToken(String(e.target.value))}
+					/>
+
+					<Button
+						onClick={async () => {
+							viewModel.setToken(await navigator.clipboard.readText())
+						}}
+					>
+						<ContentPasteIcon />
+					</Button>
+
+					<Button
+						onClick={() => {
+							navigator.clipboard.writeText(viewModel.token as string)
+							setButtonCopy(true)
+						}}
+					>
+						<ContentCopyIcon />
+					</Button>
+				</Grid>
 			</Grid>
 
-			<Grid item mt={2}>
+			<Grid item mt={6}>
 				<FormControl>
 					<FormLabel id="demo-row-radio-buttons-group-label">Tipo</FormLabel>
 					<RadioGroup
@@ -92,22 +123,23 @@ export default function HomeContentAESView() {
 							setButtonTransform(true)
 						}}
 					>
-						TRANSFORMAR
+						{t("transform")}
 					</Button>
 				</Grid>
 			</Grid>
 
 			<Grid item mt={2}>
-				<Grid container justifyContent={"center"}>
+				<Grid container justifyContent={"stretch"}>
 					<TextareaAutosize
 						minRows={5}
 						placeholder={t("encrypted_text_description")}
 						value={viewModel.outputText as string}
-						style={{ maxWidth: "300", width: "250px" }}
+						style={{ maxWidth: "250px", width: "250px" }}
 					/>
 
 					<Button
-						onClick={(e) => {
+						variant="outlined"
+						onClick={() => {
 							navigator.clipboard.writeText(viewModel.outputText as string)
 							setButtonCopy(true)
 						}}

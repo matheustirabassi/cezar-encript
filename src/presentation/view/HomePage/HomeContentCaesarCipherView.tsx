@@ -144,7 +144,7 @@ export default function HomeContentCaesarCipherView() {
 			</Grid>
 
 			<Snackbar open={openSnackbar} autoHideDuration={2000} onClose={() => setOpenSnackbar(false)}>
-				<Alert severity="success">Texto convertido!</Alert>
+				<Alert severity="success">{ t("text_converted") }</Alert>
 			</Snackbar>
 
 			<Snackbar
@@ -152,14 +152,8 @@ export default function HomeContentCaesarCipherView() {
 				autoHideDuration={2000}
 				onClose={() => setButtonCopyClicked(false)}
 			>
-				<Alert severity="info">Texto criptografado copiado!</Alert>
+				<Alert severity="info">{ t("encrypted_text_copied") }</Alert>
 			</Snackbar>
-
-			<Grid container justifyContent="flex-end" mt={2} pr={4}>
-				<Typography variant="h6" color="primary">
-					{t("author_description")}
-				</Typography>
-			</Grid>
 		</Grid>
 	)
 }
