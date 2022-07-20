@@ -9,7 +9,7 @@ import {
 	Radio,
 	RadioGroup,
 	Snackbar,
-	TextareaAutosize
+	TextareaAutosize,
 } from "@mui/material"
 import Grid from "@mui/material/Grid/Grid"
 import TextField from "@mui/material/TextField/TextField"
@@ -35,6 +35,12 @@ export default function HomeContentAESView() {
 	return (
 		<Grid container direction={"column"} alignContent="center">
 			<Grid item mt={2}>
+				<Button onClick={ () => viewModel.clear() } sx={{ width: 300 }}>
+					{t("clear")}
+				</Button>
+			</Grid>
+
+			<Grid item mt={2}>
 				<Grid container>
 					<TextField
 						variant="filled"
@@ -47,6 +53,7 @@ export default function HomeContentAESView() {
 						value={viewModel.inputText}
 						onChange={(e) => viewModel.setInputText(String(e.target.value))}
 					/>
+
 					<Button
 						onClick={async () => {
 							viewModel.setInputText(await navigator.clipboard.readText())
@@ -105,6 +112,7 @@ export default function HomeContentAESView() {
 							control={<Radio />}
 							label={t("encrypt")}
 						/>
+
 						<FormControlLabel
 							value={KindOfConvertEnum.DECRYPT}
 							control={<Radio />}

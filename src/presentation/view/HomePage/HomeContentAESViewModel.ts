@@ -36,6 +36,13 @@ export default function HomeContentAESViewModel() {
 		return true
 	}
 
+	function clear() {
+		setInputText("")
+		setToken("")
+		setKindOfConvert(undefined)
+		setOutputText("")
+	}
+
 	return {
 		inputText,
 		setInputText,
@@ -46,5 +53,6 @@ export default function HomeContentAESViewModel() {
 		outputText,
 		setOutputText,
 		encryptOrDecrypt,
+		clear
 	}
 }
