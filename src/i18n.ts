@@ -22,7 +22,8 @@ const resources = {
 			"token_description": "O token a ser usado para criptografar ou descriptografar o texto.",
 			"encrypted_text_copied": "Texto criptografado copiado!",
 			"text_converted": "Texto convertido!",
-			"transform" : "transformar"
+			"transform" : "transformar",
+			"token_invalid": "O token inserido é inválido"
     }
   },
   en: {
@@ -41,7 +42,8 @@ const resources = {
 			"token": "token",
 			"encrypted_text_copied": "Encrypted text copied!",
 			"text_converted": "Converted text!",
-			"transform" : "transform"
+			"transform" : "transform",
+			"token_invalid": "The inserted token is invalid"
     }
   }
 };

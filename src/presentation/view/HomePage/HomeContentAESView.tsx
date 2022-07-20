@@ -30,12 +30,10 @@ export default function HomeContentAESView() {
 
 	const [buttonCopy, setButtonCopy] = useState(false)
 
-	const [buttonTransform, setButtonTransform] = useState(false)
-
 	return (
 		<Grid container direction={"column"} alignContent="center">
 			<Grid item mt={2}>
-				<Button onClick={ () => viewModel.clear() } sx={{ width: 300 }}>
+				<Button onClick={() => viewModel.clear()} sx={{ width: 300 }}>
 					{t("clear")}
 				</Button>
 			</Grid>
@@ -128,7 +126,6 @@ export default function HomeContentAESView() {
 						variant="contained"
 						onClick={() => {
 							viewModel.encryptOrDecrypt()
-							setButtonTransform(true)
 						}}
 					>
 						{t("transform")}
@@ -143,6 +140,7 @@ export default function HomeContentAESView() {
 						placeholder={t("encrypted_text_description")}
 						value={viewModel.outputText as string}
 						style={{ maxWidth: "250px", width: "250px" }}
+						contentEditable={false}
 					/>
 
 					<Button
@@ -158,15 +156,15 @@ export default function HomeContentAESView() {
 			</Grid>
 
 			<Snackbar open={buttonCopy} autoHideDuration={2000} onClose={() => setButtonCopy(false)}>
-				<Alert severity="info">Texto criptografado copiado!</Alert>
+				<Alert severity="info">{t("encrypted_text_copied")}</Alert>
 			</Snackbar>
 
 			<Snackbar
-				open={buttonTransform}
+				open={viewModel.textWasConverted}
 				autoHideDuration={2000}
-				onClose={() => setButtonTransform(false)}
+				onClose={() => viewModel.setTextWasConverted(false)}
 			>
-				<Alert severity="success">Texto convertido!</Alert>
+				<Alert severity="success">{t("text_converted")}</Alert>
 			</Snackbar>
 		</Grid>
 	)

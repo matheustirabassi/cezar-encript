@@ -1,9 +1,12 @@
 import CryptoJS from "crypto-js"
 import AES from "crypto-js/aes"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { KindOfConvertEnum } from "utils/constants/Constants"
 
 export default function HomeContentAESViewModel() {
+	const { t } = useTranslation()
+
 	const [inputText, setInputText] = useState<String>("")
 
 	const [token, setToken] = useState<String>("")
@@ -12,7 +15,11 @@ export default function HomeContentAESViewModel() {
 
 	const [outputText, setOutputText] = useState<String>("")
 
+	const [textWasConverted, setTextWasConverted] = useState(false)
+
 	function encryptOrDecrypt() {
+		setTextWasConverted(false)
+
 		if (!validate()) {
 			return
 		}
@@ -25,11 +32,25 @@ export default function HomeContentAESViewModel() {
 			outputText = AES.decrypt(inputText as string, token as string).toString(CryptoJS.enc.Utf8)
 		}
 
+		if (outputText === "") {
+			setOutputText(t("token_invalid").toString())
+			return
+		}
+
 		setOutputText(outputText)
+		setTextWasConverted(true)
 	}
 
 	function validate() {
-		if (inputText === undefined) {
+		if (inputText === undefined || inputText === "") {
+			return false
+		}
+
+		if (kindOfConvert === undefined || kindOfConvert === "") {
+			return false
+		}
+
+		if (token === undefined || token === "") {
 			return false
 		}
 
@@ -53,6 +74,8 @@ export default function HomeContentAESViewModel() {
 		outputText,
 		setOutputText,
 		encryptOrDecrypt,
-		clear
+		clear,
+		textWasConverted,
+		setTextWasConverted,
 	}
 }
