@@ -12,8 +12,7 @@ import {
 	Snackbar,
 	Switch,
 	TextareaAutosize,
-	TextField,
-	Typography
+	TextField
 } from "@mui/material"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
