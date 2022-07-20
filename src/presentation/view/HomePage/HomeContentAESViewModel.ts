@@ -4,13 +4,13 @@ import { useState } from "react"
 import { KindOfConvertEnum } from "utils/constants/Constants"
 
 export default function HomeContentAESViewModel() {
-	const [inputText, setInputText] = useState<String>()
+	const [inputText, setInputText] = useState<String>("")
 
-	const [token, setToken] = useState<String>()
+	const [token, setToken] = useState<String>("")
 
 	const [kindOfConvert, setKindOfConvert] = useState<String>()
 
-	const [outputText, setOutputText] = useState<String>()
+	const [outputText, setOutputText] = useState<String>("")
 
 	function encryptOrDecrypt() {
 		if (!validate()) {

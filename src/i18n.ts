@@ -19,7 +19,10 @@ const resources = {
 			"author_description": "feito com ❤️ por Matheus",
 			"aes": "AES",
 			"token": "Token",
-			"token_description": "O token a ser usado para criptografar ou descriptografar o texto."
+			"token_description": "O token a ser usado para criptografar ou descriptografar o texto.",
+			"encrypted_text_copied": "Texto criptografado copiado!",
+			"text_converted": "Texto convertido!",
+			"transform" : "transformar"
     }
   },
   en: {
@@ -35,7 +38,10 @@ const resources = {
 			"encrypted_text_description": "Encrypted text",
 			"author_description": "feito com ❤️ por Matheus",
 			"aes": "AES",
-			"token": "token"
+			"token": "token",
+			"encrypted_text_copied": "Encrypted text copied!",
+			"text_converted": "Converted text!",
+			"transform" : "transform"
     }
   }
 };
