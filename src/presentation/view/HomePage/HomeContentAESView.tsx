@@ -5,14 +5,16 @@ import {
 	Button,
 	FormControl,
 	FormControlLabel,
-	FormLabel,
+	FormHelperText,
+	FormLabel, InputAdornment,
+	InputLabel,
+	OutlinedInput,
 	Radio,
 	RadioGroup,
 	Snackbar,
-	TextareaAutosize,
+	TextareaAutosize
 } from "@mui/material"
 import Grid from "@mui/material/Grid/Grid"
-import TextField from "@mui/material/TextField/TextField"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { KindOfConvertEnum } from "utils/constants/Constants"
@@ -33,75 +35,84 @@ export default function HomeContentAESView() {
 	return (
 		<Grid container direction={"column"} alignContent="center">
 			<Grid item mt={2}>
-				<Button onClick={() => viewModel.clear()} sx={{ width: 300 }}>
+				<Grid container direction="column">
+				<Button onClick={() => viewModel.clear()} >
 					{t("clear")}
 				</Button>
-			</Grid>
-
-			<Grid item mt={2}>
-				<Grid container>
-					<TextField
-						variant="filled"
-						label={t("text")}
-						helperText={t("used_text_description")}
-						maxRows={5}
-						multiline
-						autoFocus={true}
-						sx={{ maxWidth: "250px" }}
-						value={viewModel.inputText}
-						onChange={(e) => viewModel.setInputText(String(e.target.value))}
-					/>
-
-					<Button
-						onClick={async () => {
-							viewModel.setInputText(await navigator.clipboard.readText())
-						}}
-					>
-						<ContentPasteIcon />
-					</Button>
 				</Grid>
 			</Grid>
 
 			<Grid item mt={2}>
-				<Grid container direction="row">
-					<TextField
-						variant="filled"
-						label={t("token")}
-						helperText={t("token_description")}
+				<FormControl fullWidth sx={{ m: 1 }}>
+					<InputLabel htmlFor="input-text">{t("text")}</InputLabel>
+					<OutlinedInput
+						id="input-text"
 						maxRows={5}
 						multiline
-						focused={viewModel.token !== ""}
-						sx={{ maxWidth: "250px" }}
+						label={t("text")}
+						autoFocus={true}
+						value={viewModel.inputText}
+						onChange={(e) => viewModel.setInputText(String(e.target.value))}
+						endAdornment={
+							<InputAdornment position="end">
+								<Button
+									onClick={async () => {
+										viewModel.setInputText(await navigator.clipboard.readText())
+									}}
+								>
+									<ContentPasteIcon />
+								</Button>
+							</InputAdornment>
+						}
+					/>
+					<FormHelperText id="input-helper-text">{t("used_text_description")}</FormHelperText>
+				</FormControl>
+			</Grid>
+
+			<Grid item mt={2}>
+				<FormControl fullWidth sx={{ m: 1 }}>
+					<InputLabel htmlFor="token">{t("token")}</InputLabel>
+					<OutlinedInput
+						id="token"
+						label={t("token")}
+						maxRows={5}
+						multiline
+						endAdornment={
+							<InputAdornment position="end">
+								<Button
+									onClick={async () => {
+										viewModel.setToken(await navigator.clipboard.readText())
+									}}
+								>
+									<ContentPasteIcon />
+								</Button>
+
+								<Button
+									onClick={() => {
+										navigator.clipboard.writeText(viewModel.token as string)
+										setButtonCopy(true)
+									}}
+								>
+									<ContentCopyIcon />
+								</Button>
+							</InputAdornment>
+						}
 						value={viewModel.token}
 						onChange={(e) => viewModel.setToken(String(e.target.value))}
 					/>
-
-					<Button
-						onClick={async () => {
-							viewModel.setToken(await navigator.clipboard.readText())
-						}}
-					>
-						<ContentPasteIcon />
-					</Button>
-
-					<Button
-						onClick={() => {
-							navigator.clipboard.writeText(viewModel.token as string)
-							setButtonCopy(true)
-						}}
-					>
-						<ContentCopyIcon />
-					</Button>
-				</Grid>
+					<FormHelperText id="input-helper-text">{t("token_description")}</FormHelperText>
+				</FormControl>
 			</Grid>
 
 			<Grid item mt={6}>
-				<FormControl>
-					<FormLabel id="demo-row-radio-buttons-group-label">Tipo</FormLabel>
+				<FormControl fullWidth sx={{ m: 1 }}>
+					<FormLabel htmlFor="kind-of-convert">Tipo</FormLabel>
 					<RadioGroup
+						id="kind-of-convert"
 						row
-						aria-labelledby="demo-row-radio-buttons-group-label"
+						aria-labelledby="kind-of-convert"
 						name="type-radio-buttons"
+						sx={{ justifyContent: "space-between" }}
 						value={viewModel.kindOfConvert ?? null}
 						onChange={(e) => viewModel.setKindOfConvert(e.target.value)}
 					>
@@ -134,14 +145,15 @@ export default function HomeContentAESView() {
 			</Grid>
 
 			<Grid item mt={2}>
-				<Grid container justifyContent={"stretch"}>
-					<TextareaAutosize
-						minRows={5}
-						placeholder={t("encrypted_text_description")}
-						value={viewModel.outputText as string}
-						style={{ maxWidth: "250px", width: "250px" }}
-						contentEditable={false}
-					/>
+				<Grid container justifyContent={"center"} direction={"column"}>
+					<FormControl fullWidth>
+						<TextareaAutosize
+							minRows={5}
+							placeholder={t("encrypted_text_description")}
+							value={viewModel.outputText as string}
+							contentEditable={false}
+						/>
+					</FormControl>
 
 					<Button
 						variant="outlined"
