@@ -6,13 +6,14 @@ import {
 	FormControl,
 	FormControlLabel,
 	FormHelperText,
-	FormLabel, InputAdornment,
+	FormLabel,
+	InputAdornment,
 	InputLabel,
 	OutlinedInput,
 	Radio,
 	RadioGroup,
 	Snackbar,
-	TextareaAutosize
+	TextareaAutosize,
 } from "@mui/material"
 import Grid from "@mui/material/Grid/Grid"
 import { useState } from "react"
@@ -36,9 +37,7 @@ export default function HomeContentAESView() {
 		<Grid container direction={"column"} alignContent="center">
 			<Grid item mt={2}>
 				<Grid container direction="column">
-				<Button onClick={() => viewModel.clear()} >
-					{t("clear")}
-				</Button>
+					<Button onClick={() => viewModel.clear()}>{t("clear")}</Button>
 				</Grid>
 			</Grid>
 

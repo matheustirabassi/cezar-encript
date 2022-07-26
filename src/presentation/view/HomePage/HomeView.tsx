@@ -1,10 +1,10 @@
 import { AppBar, Box, Grid, Tab, Tabs, Typography } from "@mui/material"
 import { TabPanel } from "presentation/components/TabPanel"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import SwipeableViews from "react-swipeable-views"
 import HomeContentAESView from "./HomeContentAESView"
 import HomeContentCaesarCipherView from "./HomeContentCaesarCipherView"
-import { useTranslation } from "react-i18next"
 
 /** A tela principal do site */
 export default function HomeView() {
